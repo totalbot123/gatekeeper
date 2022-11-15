@@ -1,0 +1,15 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sReplicaLimits
+metadata:
+  name: gatekeeper-replica-count
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
+    excludedNamespaces: ["kube-system", "kube-public", "kube-node-lease"]
+  parameters:
+    ranges:
+    - min_replicas: 1
+      max_replicas: 5
+    
